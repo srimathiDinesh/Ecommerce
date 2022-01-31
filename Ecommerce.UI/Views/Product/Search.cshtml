@@ -1,0 +1,16 @@
+﻿@model IEnumerable<Ecommerce.Application.Products.Models.ProductModel>
+
+@{ ViewBag.Title = "Search"; }
+
+<h1>Search Products</h1>
+
+<div class="row">
+    <div class="col-12">
+        <div class="card-deck">
+            @foreach (var model in Model)
+            {
+                @await Html.PartialAsync("_ProductItem", model)
+            }            
+        </div>
+    </div>
+</div>

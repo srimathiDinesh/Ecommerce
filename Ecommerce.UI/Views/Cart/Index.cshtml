@@ -1,0 +1,42 @@
+﻿@model Ecommerce.UI.Models.Cart
+
+@{ ViewBag.Title = "Your Cart"; }
+
+<h2>Your Cart</h2>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>Quantity</th>
+            <th>Item</th>
+            <th class="text-right">Price</th>
+            <th class="text-right">Subtotal</th>
+            <th>&nbsp;</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model.Items)
+        {
+            <tr>
+                <td class="text-left">@item.Quantity</td>
+                <td class="text-left">@item.Product.Name</td>
+                <td class="text-right">@item.Product.Price.ToString("c")</td>
+                <td class="text-right">@((item.Quantity * item.Product.Price).ToString("c"))</td>
+                <td class="text-right">
+                    @using (Html.BeginForm("RemoveFromCart", "Cart"))
+                    {
+                        @Html.Hidden("productId", item.Product.Id)
+                        <button type="submit" name="btnAction" value="remove" class="btn">&times;</button>
+                    }
+                </td>
+            </tr>
+        }
+    </tbody>
+    <tfoot>
+        <tr>
+            <td colspan="3" class="text-right">Total:</td>
+            <td class="text-right">@Model.TotalPrice().ToString("c")</td>
+            <td>&nbsp;</td>
+        </tr>
+    </tfoot>
+</table>

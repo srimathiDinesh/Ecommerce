@@ -1,0 +1,17 @@
+﻿@model Ecommerce.Application.Products.Models.ProductModel
+
+<div class="card" style="width: 18rem;">
+    <img src="~/Files/Images/Products/@Model.ImagePath" class="img-thumbnail" height="100" width="100" asp-append-version="true" />
+    <div class="card-body">
+        <h5 class="card-title">@Model.Name</h5>
+        <p class="card-text badge badge-primary float-right">@Model.Price.ToString("c")</p>
+        <br />
+        <footer>
+            @using (Html.BeginForm("AddToCart", "Cart"))
+            {
+                @Html.Hidden("productId", Model.Id)
+                <button type="submit" class="btn btn-primary">Add to Cart</button>
+            }
+        </footer>
+    </div>
+</div>
